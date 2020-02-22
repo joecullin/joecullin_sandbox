@@ -1,0 +1,16 @@
+# vscode
+.vscode
+.vscode/settings.json
+
+# subversion
+.svn
+
+# vi temp files
+*.swp
+*.swo
+*~
+
+# Mac folder files
+.DS_Store
+
+*node_modules

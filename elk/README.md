@@ -11,12 +11,21 @@ Table of contents:
 ---
 ## Logstash
 
+### Sample project overview:
+
+Take a one-line input like `2020-02-19 13:24:05 hello joe`, and parse it into these fields:
+* yyyy-mm-dd
+* hour
+* minute
+* second
+* message
+
 Config file to edit:
 ```
 joecullin_sandbox/elk/docker-elk/logstash/pipeline/logstash.conf
 ```
 
-Restart:
+Restart logstash:
 ```
 docker-compose stop logstash && docker-compose start logstash && docker-compose logs -f logstash
 ```
@@ -30,6 +39,9 @@ echo "2020-02-19 13:24:05 hello joe" | nc -v localhost 5000
 echo "2020-02-19     13:24:05 hello joe" | nc -v localhost 5000
 ```
 
+
+
+
 ### parse input
 
 Reference:
@@ -37,12 +49,10 @@ Reference:
 - grok regexes: https://github.com/kkos/oniguruma/blob/master/doc/RE
 - grok debugger: http://grokdebug.herokuapp.com/
 - grok patterns: https://github.com/elastic/logstash/blob/v1.4.2/patterns/grok-patterns
-> - TIMESTAMP_ISO8601 allows for space instead of 'T'
+  - TIMESTAMP_ISO8601 allows for space instead of 'T'
 - nested fields: use brackets. (one-level fields can omit brackets) https://www.elastic.co/guide/en/logstash/current/event-dependent-configuration.html#logstash-config-field-references
 - Use `[@metadata][xxx]` for temp xxx fields that you don't want to include in output.
 - *dissect* is faster and simpler for splitting simple delimited data: https://www.elastic.co/guide/en/logstash/7.6/plugins-filters-dissect.html
-
-
 
 
 

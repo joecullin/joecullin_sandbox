@@ -3,12 +3,17 @@
 Notes from trying logstash.
 (Barely touched elastic or kibana so far.)
 
+Table of contents:
+* Logstash
+* Environment setup: see _Docker container setup & notes_ at the bottom of this readme.
+
+
 ---
 ## Logstash
 
 Config file to edit:
 ```
-~/code/elk_sandbox/docker-elk/logstash/pipeline/logstash.conf
+joecullin_sandbox/elk/docker-elk/logstash/pipeline/logstash.conf
 ```
 
 Restart:

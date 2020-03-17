@@ -85,6 +85,26 @@ logstash-plugin list
 ```
 ... hey, it's there now! Must've had something mis-typed before? Or maybe adding the ids helped? Or maybe I just skimmed over it as noise, since it's not pretty-printed? ... actually I just noticed the json output lags one message behind. Is it b/c it's missing a newline?
 
+### how to install new logstash plugin
+
+The LS_JAVA_OPTS setting is because I got this: `Error: Your application used more memory than the safety cap of 256M.`
+
+```
+docker exec -u 0 -it 7769f996146d bash
+
+cd /usr/share/logstash
+LS_JAVA_OPTS="-Xms256m -Xmx512m" bin/logstash-plugin install logstash-input-rss
+```
+
+### how to reload config (faster than stopping/starting whole container)
+- logstash is always pid 1 in this docker container.
+- See also https://www.elastic.co/guide/en/logstash/current/reloading-config.html for a setting to auto-reload config at a specified interval.
+- Bigger non-config changes (like installing a new plugin) may require restart.
+```
+docker exec -u 0 -it 7769f996146d bash
+kill -HUP 1
+```
+
 ---
 ## Docker container setup & notes
 
@@ -110,6 +130,11 @@ pushd /Users/Joe.Cullin/code/elk_sandbox/docker-elk && docker-compose start && p
 Stop:
 ```
 pushd /Users/Joe.Cullin/code/elk_sandbox/docker-elk && docker-compose stop && popd
+```
+
+Restart logstash to try new config:
+```
+docker stop 7769f996146d && docker start 7769f996146d && docker logs -f 7769f996146d
 ```
 
 __Skipped this for now:__ (it's just a throwaway sandbox on my machine.)

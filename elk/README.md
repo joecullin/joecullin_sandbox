@@ -27,7 +27,7 @@ joecullin_sandbox/elk/docker-elk/logstash/pipeline/logstash.conf
 
 Restart logstash:
 ```
-docker-compose stop logstash && docker-compose start logstash && docker-compose logs -f logstash
+docker-compose stop logstash && docker-compose start logstash && docker-compose logs -f --tail=10 logstash
 ```
 
 Test:

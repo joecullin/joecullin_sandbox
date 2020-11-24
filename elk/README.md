@@ -5,6 +5,7 @@ Notes from trying logstash.
 
 Table of contents:
 * Logstash
+* Elastic
 * Environment setup: see _Docker container setup & notes_ at the bottom of this readme.
 
 
@@ -103,6 +104,21 @@ LS_JAVA_OPTS="-Xms256m -Xmx512m" bin/logstash-plugin install logstash-input-rss
 ```
 docker exec -u 0 -it 7769f996146d bash
 kill -HUP 1
+```
+
+---
+## Elastic
+
+Insert a record:
+
+```
+curl -uelastic:changeme -v 'http://localhost:9200/test1/_doc/curl' -X PUT -H 'Content-type: application/json' -d '{"prop1": "test"}'
+```
+
+Simple search:
+
+```
+curl -uelastic:changeme -v 'http://localhost:9200/test1/_search'
 ```
 
 ---

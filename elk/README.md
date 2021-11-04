@@ -106,6 +106,29 @@ docker exec -u 0 -it 7769f996146d bash
 kill -HUP 1
 ```
 
+Some changes require full restart.
+Useful for rapid edit/test cycles in that case:
+```
+docker-compose start logstash && docker-compose logs -f --tail=10 logstash ; docker-compose stop logstash
+```
+
+
+### Example output using elasticsearch plugin
+
+- The hostname within this docker network is elasticsearch.
+- SIGHUP doesn't re-connect. Stop & start the logstash container if you change the connection info.
+
+```
+    elasticsearch {
+        hosts => ["http://elasticsearch:9200"]
+        index => "%{index_name}"
+        document_id => "%{request_id}"
+        user=> "joetest"
+        password => "joetest"
+    }
+```
+
+
 ---
 ## Elastic
 

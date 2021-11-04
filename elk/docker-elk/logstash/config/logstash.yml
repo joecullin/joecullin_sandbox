@@ -10,3 +10,10 @@ xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 xpack.monitoring.enabled: true
 xpack.monitoring.elasticsearch.username: elastic
 xpack.monitoring.elasticsearch.password: changeme
+
+# So I can get FIFO processing
+pipeline:
+    workers: 1
+    batch:
+        size: 1
+
